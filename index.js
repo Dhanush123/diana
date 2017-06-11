@@ -68,7 +68,7 @@ function getQuizlets(usertopic, clbk){
       var randNum = Math.floor(Math.random() * nSets);
       var chosenSetID = body.sets[randNum].id;
 
-      var options = {
+      var options2 = {
         url: "https://api.quizlet.com/2.0/sets/"+chosenSetID+"?client_id=DZH2jBMBKx&whitespace=1"
       };
       function callback2(err2,res2,body2){
