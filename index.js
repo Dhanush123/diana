@@ -16,7 +16,7 @@ server.post('/hook', function(req, res) {
   console.log('hook request');
   try {
     if (req.body) {
-      console.log(JSON.stringify(req));
+      console.log(JSON.stringify(req.body));
       var requestBody = req.body;
       if (requestBody.result && requestBody.result.action && requestBody.result.action == 'getUserTopic') {
         getUserTopic(requestBody, function(result) {
