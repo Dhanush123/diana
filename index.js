@@ -100,6 +100,7 @@ function getQuizlets(usertopic, clbk){
            };
            cardObj.title = body2.terms[i].term;
            cardObj.subtitle = body2.terms[i].definition;
+           cardsSend[i] = cardObj;
          }
          clbk();
         }
