@@ -90,15 +90,18 @@ function getQuizlets(usertopic, clbk){
           console.log('body2.terms.length: '+JSON.stringify(body2.terms.length));
         //  var termNames = [];
         //  var defs = [];
-         var nCards = body2.terms.length > 10 ? 10 : body2.terms.length;
+         var nCards = body2.terms.length >= 10 ? 10 : body2.terms.length;
          for(var i = 0; i < nCards; i++){
-           var cardObj = {
-                title: "",
-                subtitle: "",
-           };
-           cardObj.title = body2.terms[i].term.substring(0,80);
-           cardObj.subtitle = body2.terms[i].definition.substring(0,80);
-           cardsSend[i] = cardObj;
+           if(body2.terms[i]){
+             var cardObj = {
+                  title: "",
+                  subtitle: "",
+             };
+             cardObj.title = body2.terms[i].term.substring(0,80);
+             cardObj.subtitle = body2.terms[i].definition.substring(0,80);
+             cardsSend[i] = cardObj;
+             console.log("cardsSend["+i+"]"+JSON.stringify(cardsSend[i]));
+           }
          }
          clbk();
         }
