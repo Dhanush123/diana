@@ -23,10 +23,11 @@ server.post('/hook', function (req, res) {
                 // user_id = requestBody.originalRequest.data.recipient.id;
                return res.json(
                 {
+                  speech: "",
                   "type": 1,
-                  speech: cardsSend,
+                  messages: cardsSend
                   // displayText: "test response1",
-                  source: 'dhanush-diana'
+                  // source: 'dhanush-diana'
 
               }
             );
@@ -82,6 +83,7 @@ function getQuizlets(usertopic, clbk){
          for(var i = 0; i < nCards; i++){
            if(body2.terms[i]){
              var cardObj = {
+                         "type": 1,
                   title: "",
                   subtitle: "",
                   buttons:[
