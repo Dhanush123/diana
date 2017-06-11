@@ -91,11 +91,19 @@ function getQuizlets(usertopic, clbk){
         //  var termNames = [];
         //  var defs = [];
          var nCards = body2.terms.length >= 10 ? 10 : body2.terms.length;
+         cardsSend = [];
          for(var i = 0; i < nCards; i++){
            if(body2.terms[i]){
              var cardObj = {
                   title: "",
                   subtitle: "",
+                  buttons:[
+                  {
+                    "type":"web_url",
+                    "url":"github.com/Dhanush123",
+                    "title":"More Info"
+                  }
+                ]
              };
              cardObj.title = body2.terms[i].term.substring(0,80);
              cardObj.subtitle = body2.terms[i].definition.substring(0,80);
