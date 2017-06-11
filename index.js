@@ -110,30 +110,16 @@ function getQuizlets(usertopic, mainRes) {
               // source: 'dhanush-diana'
             });
           } else if (source == "twilio") {
-            var nCards = body2.terms.length >= 10 ? 10 : body2.terms.length;
-            cardsSend = [];
-            for (var i = 0; i < nCards; i++) {
+            result = "";
+            for (var i = 0; i < body2.terms.length; i++) {
               if (body2.terms[i]) {
-                var cardObj = {
-                  "type": 1,
-                  title: "",
-                  subtitle: "",
-                  image_url: "",
-                  buttons: [{
-                    "type": "web_url",
-                    "url": "github.com/Dhanush123",
-                    "title": "More Info"
-                  }]
-                };
-                cardObj.title = body2.terms[i].term.substring(0, 80);
-                cardObj.subtitle = body2.terms[i].definition.substring(0, 80);
-                if (body2.terms[i].image) {
-                  cardObj.image_url = body2.terms[i].image.url;
-                }
-                cardsSend[i] = cardObj;
-                console.log("cardsSend[" + i + "]" + JSON.stringify(cardsSend[i]));
+                result += "-" + body2.terms[i].term + ": " + body2.terms[i].definition + "\n";
               }
             }
+            console.log(result);
+            return mainRes.json({
+              "speech": result
+            });
           }
         }
       }
