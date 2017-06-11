@@ -78,7 +78,7 @@ function getQuizlets(usertopic, clbk){
           console.log('body2.terms.length: '+body2.terms.length);
         //  var termNames = [];
         //  var defs = [];
-         var nCards = terms.length > 10 ? 10 : terms.length;
+         var nCards = body2.terms.length > 10 ? 10 : body2.terms.length;
          for(var i = 0; i < nCards; i++){
            var cardObj = {
                 title: "",
