@@ -61,7 +61,7 @@ function getQuizlets(usertopic, clbk){
   };
   function callback(err,res,body){
     if(!err && body){
-                var body = JSON.parse(body);
+      var body = JSON.parse(body);
       console.log('body: '+body);
       console.log('body.sets.length: '+body.sets.length);
       var nSets = body.sets.length;
@@ -75,7 +75,7 @@ function getQuizlets(usertopic, clbk){
         if(!err2 && body2){
           var body2 = JSON.parse(body2);
           console.log('body2: '+body);
-          console.log('terms.length: '+terms.length);
+          console.log('body2.terms.length: '+body2.terms.length);
         //  var termNames = [];
         //  var defs = [];
          var nCards = terms.length > 10 ? 10 : terms.length;
