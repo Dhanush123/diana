@@ -76,7 +76,7 @@ function getQuizlets(usertopic, mainRes) {
           var body2 = JSON.parse(body2);
           console.log('body2: ' + JSON.stringify(body2));
           console.log('body2.terms.length: ' + JSON.stringify(body2.terms.length));
-          if (source == "facebook") {
+          if (source === "facebook") {
             var nCards = body2.terms.length >= 10 ? 10 : body2.terms.length;
             cardsSend = [];
             for (var i = 0; i < nCards; i++) {
@@ -109,7 +109,7 @@ function getQuizlets(usertopic, mainRes) {
               // displayText: "test response1",
               // source: 'dhanush-diana'
             });
-          } else if (source == "twilio") {
+          } else if (source === "twilio") {
             var result = "";
             for (var i = 0; i < body2.terms.length; i++) {
               if (body2.terms[i]) {
@@ -121,7 +121,7 @@ function getQuizlets(usertopic, mainRes) {
             return mainRes.json({
               "speech": result
             });
-          } else if (source == "skype") {
+          } else if (source === "skype") {
             var result = "";
             for (var i = 0; i < body2.terms.length; i++) {
               if (body2.terms[i]) {
@@ -129,10 +129,10 @@ function getQuizlets(usertopic, mainRes) {
               }
             }
             result = result.substring(0, 320);
-            console.log(result);
+            console.log("Skype: " + result);
             return mainRes.json({
               "skype": {
-                "text": result  
+                "text": result
               }
             });
           }
