@@ -71,6 +71,7 @@ function getQuizlets(usertopic) {
       };
 
       function quiz2Callback(err2, res2, body2) {
+        console.log('hello');
         if (!err2 && body2) {
           var body2 = JSON.parse(body2);
           console.log('body2: ' + JSON.stringify(body2));
