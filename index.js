@@ -11,24 +11,28 @@ server.use(logger('dev'));
 server.use(bodyParser.json());
 
 var cardsSend = [];
+var source = "";
 
 server.post('/hook', function(req, res) {
   console.log('hook request');
   try {
     if (req.body) {
       console.log(JSON.stringify(req.body));
+      source = req.body.originalRequest.source;
       var requestBody = req.body;
       if (requestBody.result && requestBody.result.action && requestBody.result.action == 'getUserTopic') {
-        getUserTopic(requestBody, function(result) {
-          console.log('result: ', cardsSend);
-          // user_id = requestBody.originalRequest.data.recipient.id;
-          return res.json({
-            speech: "",
-            messages: cardsSend
-            // displayText: "test response1",
-            // source: 'dhanush-diana'
-          });
-        });
+        getUserTopic(requestBody);
+
+        // function(result) {
+        //   console.log('result: ', cardsSend);
+        //   // user_id = requestBody.originalRequest.data.recipient.id;
+        //   return res.json({
+        //     speech: "",
+        //     messages: cardsSend
+        //     // displayText: "test response1",
+        //     // source: 'dhanush-diana'
+        //   });
+        // });
       }
     }
   } catch (err) {
@@ -42,12 +46,12 @@ server.post('/hook', function(req, res) {
   }
 });
 
-function getUserTopic(requestBody, callback) {
+function getUserTopic(requestBody) {
   console.log('requestBody: ' + JSON.stringify(requestBody));
-  getQuizlets(requestBody.result.parameters.usertopic, callback);
+  getQuizlets(requestBody.result.parameters.usertopic);
 }
 
-function getQuizlets(usertopic, clbk) {
+function getQuizlets(usertopic) {
   var options1 = {
     url: "https://api.quizlet.com/2.0/search/sets?q=" + usertopic + "&client_id=DZH2jBMBKx"
   };
@@ -62,50 +66,82 @@ function getQuizlets(usertopic, clbk) {
       var chosenSetID = body.sets[randNum].id;
       console.log("chosenSetID: " + chosenSetID);
 
-      var options2 = {
+      var qOptions = {
         url: "https://api.quizlet.com/2.0/sets/" + chosenSetID + "?client_id=DZH2jBMBKx&whitespace=1"
       };
 
-      function callback2(err2, res2, body2) {
+      function quiz2Callback(err2, res2, body2) {
         if (!err2 && body2) {
           var body2 = JSON.parse(body2);
           console.log('body2: ' + JSON.stringify(body2));
           console.log('body2.terms.length: ' + JSON.stringify(body2.terms.length));
-          //  var termNames = [];
-          //  var defs = [];
-          var nCards = body2.terms.length >= 10 ? 10 : body2.terms.length;
-          cardsSend = [];
-          for (var i = 0; i < nCards; i++) {
-            if (body2.terms[i]) {
-              var cardObj = {
-                "type": 1,
-                title: "",
-                subtitle: "",
-                image_url: "",
-                buttons: [{
-                  "type": "web_url",
-                  "url": "github.com/Dhanush123",
-                  "title": "More Info"
-                }]
-              };
-              cardObj.title = body2.terms[i].term.substring(0, 80);
-              cardObj.subtitle = body2.terms[i].definition.substring(0, 80);
-              if (body2.terms[i].image) {
-                cardObj.image_url = body2.terms[i].image.url;
+          if (source == "facebook") {
+            var nCards = body2.terms.length >= 10 ? 10 : body2.terms.length;
+            cardsSend = [];
+            for (var i = 0; i < nCards; i++) {
+              if (body2.terms[i]) {
+                var cardObj = {
+                  "type": 1,
+                  title: "",
+                  subtitle: "",
+                  image_url: "",
+                  buttons: [{
+                    "type": "web_url",
+                    "url": "github.com/Dhanush123",
+                    "title": "More Info"
+                  }]
+                };
+                cardObj.title = body2.terms[i].term.substring(0, 80);
+                cardObj.subtitle = body2.terms[i].definition.substring(0, 80);
+                if (body2.terms[i].image) {
+                  cardObj.image_url = body2.terms[i].image.url;
+                }
+                cardsSend[i] = cardObj;
+                console.log("cardsSend[" + i + "]" + JSON.stringify(cardsSend[i]));
               }
-              cardsSend[i] = cardObj;
-              console.log("cardsSend[" + i + "]" + JSON.stringify(cardsSend[i]));
+            }
+            console.log('result: ', cardsSend);
+            // user_id = requestBody.originalRequest.data.recipient.id;
+            return res.json({
+              speech: "",
+              messages: cardsSend
+              // displayText: "test response1",
+              // source: 'dhanush-diana'
+            });
+          } else if (source == "twilio") {
+            var nCards = body2.terms.length >= 10 ? 10 : body2.terms.length;
+            cardsSend = [];
+            for (var i = 0; i < nCards; i++) {
+              if (body2.terms[i]) {
+                var cardObj = {
+                  "type": 1,
+                  title: "",
+                  subtitle: "",
+                  image_url: "",
+                  buttons: [{
+                    "type": "web_url",
+                    "url": "github.com/Dhanush123",
+                    "title": "More Info"
+                  }]
+                };
+                cardObj.title = body2.terms[i].term.substring(0, 80);
+                cardObj.subtitle = body2.terms[i].definition.substring(0, 80);
+                if (body2.terms[i].image) {
+                  cardObj.image_url = body2.terms[i].image.url;
+                }
+                cardsSend[i] = cardObj;
+                console.log("cardsSend[" + i + "]" + JSON.stringify(cardsSend[i]));
+              }
             }
           }
-          clbk();
         }
+
+        request(qOptions, fbCallback);
       }
-
-      request(options2, callback2);
     }
-  }
 
-  request(options1, callback1);
+    request(options1, callback1);
+  }
 }
 
 //for reference: http://stackoverflow.com/questions/37960857/how-to-show-personalized-welcome-message-in-facebook-messenger?answertab=active#tab-top
