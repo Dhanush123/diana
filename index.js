@@ -121,7 +121,7 @@ function getQuizlets(usertopic, mainRes) {
             return mainRes.json({
               "speech": result
             });
-          } else if (source == "") {
+          } else if (source == "skype") {
             var result = "";
             for (var i = 0; i < body2.terms.length; i++) {
               if (body2.terms[i]) {
