@@ -2,7 +2,10 @@
 
 const express = require('express');
 
-restService.post('/hook', function (req, res) {
+const server = express();
+server.use(bodyParser.json());
+
+server.post('/hook', function (req, res) {
   console.log('hook request');
   try {
 
@@ -65,7 +68,7 @@ function setGreetingText() {
   createGreetingApi(greetingData);
 }
 
-restService.listen((process.env.PORT || 8000), function () {
+server.listen((process.env.PORT || 8000), function () {
   console.log('Server listening');
   setGreetingText();
 });
