@@ -116,7 +116,7 @@ function getQuizlets(usertopic, mainRes) {
                 result += "-" + body2.terms[i].term + ": " + body2.terms[i].definition + "\n";
               }
             }
-            result = result.substring(0, 160);
+            result = result.substring(0, 1600);
             console.log(result);
             return mainRes.json({
               "speech": result
@@ -128,7 +128,7 @@ function getQuizlets(usertopic, mainRes) {
                 result += "-" + body2.terms[i].term + ": " + body2.terms[i].definition + "\n";
               }
             }
-            result = result.substring(0, 160);
+            result = result.substring(0, 1600);
             console.log("Skype: " + result);
             return mainRes.json({
               "speech": result
