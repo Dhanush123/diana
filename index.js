@@ -9,7 +9,6 @@ const server = express();
 server.use(bodyParser.json());
 
 var cardsSend = [];
-var user_id = 0;
 
 server.post('/hook', function (req, res) {
   console.log('hook request');
@@ -85,6 +84,7 @@ function getQuizlets(usertopic, clbk){
                          "type": 1,
                   title: "",
                   subtitle: "",
+                  image_url: "",
                   buttons:[
                   {
                     "type":"web_url",
@@ -95,6 +95,9 @@ function getQuizlets(usertopic, clbk){
              };
              cardObj.title = body2.terms[i].term.substring(0,80);
              cardObj.subtitle = body2.terms[i].definition.substring(0,80);
+             if(body2.terms[i].image.url){
+               cardObj.image_url = body2.terms[i].image.url;
+             }
              cardsSend[i] = cardObj;
              console.log("cardsSend["+i+"]"+JSON.stringify(cardsSend[i]));
            }
