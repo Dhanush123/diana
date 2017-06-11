@@ -20,28 +20,15 @@ server.post('/hook', function (req, res) {
             if (requestBody.result.action == 'getUserTopic') {
               getUserTopic(requestBody,function(result) {
                 console.log('result: ', cardsSend);
-                user_id = requestBody.originalRequest.data.recipient.id;
+                // user_id = requestBody.originalRequest.data.recipient.id;
                return res.json(
-                 {
-  "recipient":{
-    "id":user_id
-  },
-  "message":{
-    "attachment":{
-      "type":"template",
-      "payload":{
-        "template_type":"generic",
-        "elements": cardsSend
-      }
-    }
-  }
-}
-              //   {
-              //     speech: "test response1",
-              //     displayText: "test response1",
-              //     source: 'dhanush-diana'
-              //
-              // }
+                {
+                  "type": 1,
+                  speech: cardsSend,
+                  // displayText: "test response1",
+                  source: 'dhanush-diana'
+
+              }
             );
 
               //);
