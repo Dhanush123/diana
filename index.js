@@ -131,9 +131,7 @@ function getQuizlets(usertopic, mainRes) {
             result = result.substring(0, 160);
             console.log("Skype: " + result);
             return mainRes.json({
-              skype: {
-                text: result
-              }
+              "speech": result
             });
           }
         }
