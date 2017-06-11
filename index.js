@@ -16,7 +16,7 @@ server.post('/hook', function (req, res) {
           if (requestBody.result) {
             if (requestBody.result.action == 'getUserTopic') {
               getUserTopic(requestBody,function(result) {
-                console.log('result: ', speech);
+                console.log('result: ', "test response1");
                 return res.json({
                   speech: "test response1",
                   displayText: "test response1",
