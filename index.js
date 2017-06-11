@@ -20,8 +20,8 @@ server.post('/hook', function (req, res) {
                 console.log('result: ', cardsSend);
                return res.json(
                 {
-                  speech: "test response1",
-                  displayText: "test response1",
+                  speech: cardsSend,
+                  displayText: cardsSend,
                   source: 'dhanush-diana'
 
               });
