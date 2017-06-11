@@ -21,9 +21,6 @@ server.post('/hook', function (req, res) {
                 console.log('result: ', cardsSend);
                 return res.json(
                   {
-  "recipient":{
-    "id":"USER_ID"
-  },
   "message":{
     "attachment":{
       "type":"template",
