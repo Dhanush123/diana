@@ -15,7 +15,7 @@ server.post('/hook', function (req, res) {
           var requestBody = req.body;
           if (requestBody.result) {
             if (requestBody.result.action == 'getUserTopic') {
-              getLastCityQuake(requestBody,function(result) {
+              getUserTopic(requestBody,function(result) {
                 console.log('result: ', speech);
                 return res.json({
                   speech: "test response1",
