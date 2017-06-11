@@ -80,14 +80,14 @@ function getQuizlets(usertopic, clbk){
       var nSets = body.sets.length;
       var randNum = Math.floor(Math.random() * nSets);
       var chosenSetID = body.sets[randNum].id;
-
+      console.log("chosenSetID: "+chosenSetID);
       var options2 = {
         url: "https://api.quizlet.com/2.0/sets/"+chosenSetID+"?client_id=DZH2jBMBKx&whitespace=1"
       };
       function callback2(err2,res2,body2){
         if(!err2 && body2){
           var body2 = JSON.parse(body2);
-          console.log('body2: '+JSON.stringify(body));
+          console.log('body2: '+JSON.stringify(body2));
           console.log('body2.terms.length: '+JSON.stringify(body2.terms.length));
         //  var termNames = [];
         //  var defs = [];
