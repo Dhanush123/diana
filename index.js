@@ -24,7 +24,6 @@ server.post('/hook', function (req, res) {
                return res.json(
                 {
                   speech: "",
-                  "type": 1,
                   messages: cardsSend
                   // displayText: "test response1",
                   // source: 'dhanush-diana'
