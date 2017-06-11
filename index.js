@@ -136,9 +136,9 @@ function getQuizlets(usertopic) {
             }
           }
         }
-
-        request(qOptions, quiz2Callback);
       }
+
+      request(qOptions, quiz2Callback);
     }
   }
 
