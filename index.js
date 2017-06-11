@@ -4,10 +4,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
 
+
 const server = express();
 server.use(bodyParser.json());
 
 var cardsSend = [];
+var user_id = 0;
 
 server.post('/hook', function (req, res) {
   console.log('hook request');
@@ -18,13 +20,30 @@ server.post('/hook', function (req, res) {
             if (requestBody.result.action == 'getUserTopic') {
               getUserTopic(requestBody,function(result) {
                 console.log('result: ', cardsSend);
+                user_id = requestBody.originalRequest.data.recipient.id;
                return res.json(
-                {
-                  speech: "test response1",
-                  displayText: "test response1",
-                  source: 'dhanush-diana'
+                 {
+  "recipient":{
+    "id":user_id
+  },
+  "message":{
+    "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"generic",
+        "elements": cardsSend
+      }
+    }
+  }
+}
+              //   {
+              //     speech: "test response1",
+              //     displayText: "test response1",
+              //     source: 'dhanush-diana'
+              //
+              // }
+            );
 
-              });
               //);
               // });
             });
