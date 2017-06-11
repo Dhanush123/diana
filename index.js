@@ -125,7 +125,7 @@ function getQuizlets(usertopic, mainRes) {
             var result = "";
             for (var i = 0; i < body2.terms.length; i++) {
               if (body2.terms[i]) {
-                result += "-" + body2.terms[i].term + ": " + body2.terms[i].definition + "\n";
+                result += "-" + body2.terms[i].term + ": " + body2.terms[i].definition + "\n\n";
               }
             }
             result = result.substring(0, 1600);
