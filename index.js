@@ -85,8 +85,8 @@ function getQuizlets(usertopic, clbk){
                 subtitle: "",
                 "type": 1
            };
-           cardObj.title = terms[i].term;
-           cardObj.subtitle = terms[i].definition;
+           cardObj.title = body2.terms[i].term;
+           cardObj.subtitle = body2.terms[i].definition;
          }
          clbk();
         }
