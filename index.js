@@ -18,16 +18,32 @@ server.post('/hook', function (req, res) {
           if (requestBody.result) {
             if (requestBody.result.action == 'getUserTopic') {
               getUserTopic(requestBody,function(result) {
-                console.log('result: ', "test response1");
-                return res.json({
-                      attachment: {
-                          type: "template",
-                          payload: {
-                              template_type: "generic",
-                              elements: cardsSend
-                            }
-                          }
-                        });
+                console.log('result: ', cardsSend);
+                return res.json(
+                  {
+  "recipient":{
+    "id":"USER_ID"
+  },
+  "message":{
+    "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"generic",
+        "elements": cardsSend
+      }
+    }
+  }
+}
+                  // {
+                  //     attachment: {
+                  //         type: "template",
+                  //         payload: {
+                  //             template_type: "generic",
+                  //             elements: cardsSend
+                  //           }
+                  //         }
+                  //       }
+                      );
 
                 // return res.json({
                 //   speech: "test response1",
