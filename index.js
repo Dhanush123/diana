@@ -9,13 +9,13 @@ restService.post('/hook', function (req, res) {
       if (req.body) {
           var requestBody = req.body;
           if (requestBody.result) {
-            if (requestBody.result.action == 'actionnamehere') {
+            if (requestBody.result.action == 'getUserTopic') {
               getLastCityQuake(requestBody,function(result) {
                 console.log('result: ', speech);
                 return res.json({
-                  // speech: speech,
-                  // displayText: speech,
-                  // source: 'dhanush-quakey'
+                  speech: "test response1",
+                  displayText: "test response1",
+                  source: 'dhanush-quakey'
                 });
               });
             }
@@ -33,7 +33,7 @@ restService.post('/hook', function (req, res) {
   }
 });
 
-function actionname(requestBody, callback) {
+function getUserTopic(requestBody, callback) {
   console.log('requestBody: ' + JSON.stringify(requestBody));
       callback();
 }
