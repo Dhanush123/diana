@@ -110,7 +110,7 @@ function getQuizlets(usertopic, mainRes) {
               // source: 'dhanush-diana'
             });
           } else if (source == "twilio") {
-            result = "";
+            var result = "";
             for (var i = 0; i < body2.terms.length; i++) {
               if (body2.terms[i]) {
                 result += "-" + body2.terms[i].term + ": " + body2.terms[i].definition + "\n";
