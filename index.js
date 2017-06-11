@@ -51,7 +51,7 @@ server.post('/hook', function (req, res) {
               });
               //);
               // });
-            }
+            });
           }
       }
   }
