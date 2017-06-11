@@ -95,7 +95,7 @@ function getQuizlets(usertopic, clbk){
              };
              cardObj.title = body2.terms[i].term.substring(0,80);
              cardObj.subtitle = body2.terms[i].definition.substring(0,80);
-             if(body2.terms[i].image.url){
+             if(body2.terms[i].image){
                cardObj.image_url = body2.terms[i].image.url;
              }
              cardsSend[i] = cardObj;
