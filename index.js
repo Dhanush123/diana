@@ -19,18 +19,18 @@ server.post('/hook', function (req, res) {
             if (requestBody.result.action == 'getUserTopic') {
               getUserTopic(requestBody,function(result) {
                 console.log('result: ', cardsSend);
-                return res.json(
-                  {
-  "message":{
-    "attachment":{
-      "type":"template",
-      "payload":{
-        "template_type":"generic",
-        "elements": cardsSend
-      }
-    }
-  }
-}
+                // return res.json(
+//                   {
+//   "message":{
+//     "attachment":{
+//       "type":"template",
+//       "payload":{
+//         "template_type":"generic",
+//         "elements": cardsSend
+//       }
+//     }
+//   }
+// }
                   // {
                   //     attachment: {
                   //         type: "template",
@@ -40,14 +40,17 @@ server.post('/hook', function (req, res) {
                   //           }
                   //         }
                   //       }
-                      );
+                      // );
 
-                // return res.json({
-                //   speech: "test response1",
-                //   displayText: "test response1",
-                //   source: 'dhanush-diana'
-                // });
+               return res.json(
+                {
+                  speech: "test response1",
+                  displayText: "test response1",
+                  source: 'dhanush-diana'
+
               });
+              //);
+              // });
             }
           }
       }
@@ -96,10 +99,9 @@ function getQuizlets(usertopic, clbk){
            var cardObj = {
                 title: "",
                 subtitle: "",
-                "type": 1
            };
-           cardObj.title = body2.terms[i].term;
-           cardObj.subtitle = body2.terms[i].definition;
+           cardObj.title = body2.terms[i].term.substring(0,80);
+           cardObj.subtitle = body2.terms[i].definition.substring(0,80);
            cardsSend[i] = cardObj;
          }
          clbk();
