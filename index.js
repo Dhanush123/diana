@@ -12,36 +12,12 @@ var cardsSend = [];
 server.post('/hook', function (req, res) {
   console.log('hook request');
   try {
-
       if (req.body) {
           var requestBody = req.body;
           if (requestBody.result) {
             if (requestBody.result.action == 'getUserTopic') {
               getUserTopic(requestBody,function(result) {
                 console.log('result: ', cardsSend);
-                // return res.json(
-//                   {
-//   "message":{
-//     "attachment":{
-//       "type":"template",
-//       "payload":{
-//         "template_type":"generic",
-//         "elements": cardsSend
-//       }
-//     }
-//   }
-// }
-                  // {
-                  //     attachment: {
-                  //         type: "template",
-                  //         payload: {
-                  //             template_type: "generic",
-                  //             elements: cardsSend
-                  //           }
-                  //         }
-                  //       }
-                      // );
-
                return res.json(
                 {
                   speech: "test response1",
@@ -54,6 +30,7 @@ server.post('/hook', function (req, res) {
             });
           }
       }
+    }
   }
   catch (err) {
     console.error('Cannot process request', err);
