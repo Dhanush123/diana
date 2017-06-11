@@ -21,7 +21,7 @@ server.post('/hook', function(req, res) {
       source = req.body.originalRequest.source;
       var requestBody = req.body;
       if (requestBody.result && requestBody.result.action && requestBody.result.action == 'getUserTopic') {
-        getUserTopic(requestBody);
+        getUserTopic(requestBody, res);
 
         // function(result) {
         //   console.log('result: ', cardsSend);
@@ -46,17 +46,17 @@ server.post('/hook', function(req, res) {
   }
 });
 
-function getUserTopic(requestBody) {
+function getUserTopic(requestBody, res) {
   console.log('requestBody: ' + JSON.stringify(requestBody));
-  getQuizlets(requestBody.result.parameters.usertopic);
+  getQuizlets(requestBody.result.parameters.usertopic, res);
 }
 
-function getQuizlets(usertopic) {
+function getQuizlets(usertopic, res) {
   var options1 = {
     url: "https://api.quizlet.com/2.0/search/sets?q=" + usertopic + "&client_id=DZH2jBMBKx"
   };
 
-  function callback1(err, res, body) {
+  function callback1(err, mainRes, body) {
     if (!err && body) {
       var body = JSON.parse(body);
       console.log('body: ' + JSON.stringify(body));
@@ -103,7 +103,7 @@ function getQuizlets(usertopic) {
             }
             console.log('result: ', cardsSend);
             // user_id = requestBody.originalRequest.data.recipient.id;
-            return res.json({
+            return mainRes.json({
               speech: "",
               messages: cardsSend
               // displayText: "test response1",
