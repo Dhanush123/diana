@@ -136,12 +136,12 @@ function getQuizlets(usertopic) {
           }
         }
 
-        request(qOptions, fbCallback);
+        request(qOptions, quiz2Callback);
       }
     }
-
-    request(options1, callback1);
   }
+
+  request(options1, callback1);
 }
 
 //for reference: http://stackoverflow.com/questions/37960857/how-to-show-personalized-welcome-message-in-facebook-messenger?answertab=active#tab-top
