@@ -103,6 +103,7 @@ function createGreetingApi(data) {
     }, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       console.log("Greeting set successfully!");
+      console.log(JSON.stringify(body));
     } else {
       console.error("Failed calling Thread Reference API", response.statusCode, response.statusMessage, body.error);
     }
