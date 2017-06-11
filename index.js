@@ -116,9 +116,22 @@ function getQuizlets(usertopic, mainRes) {
                 result += "-" + body2.terms[i].term + ": " + body2.terms[i].definition + "\n";
               }
             }
+            result = result.substring(0, 320);
             console.log(result);
             return mainRes.json({
               "speech": result
+            });
+          } else if (source == "") {
+            var result = "";
+            for (var i = 0; i < body2.terms.length; i++) {
+              if (body2.terms[i]) {
+                result += "-" + body2.terms[i].term + ": " + body2.terms[i].definition + "\n";
+              }
+            }
+            result = result.substring(0, 320);
+            console.log(result);
+            return mainRes.json({
+              "text": result
             });
           }
         }
