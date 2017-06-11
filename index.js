@@ -51,12 +51,12 @@ function getUserTopic(requestBody, res) {
   getQuizlets(requestBody.result.parameters.usertopic, res);
 }
 
-function getQuizlets(usertopic, res) {
+function getQuizlets(usertopic, mainRes) {
   var options1 = {
     url: "https://api.quizlet.com/2.0/search/sets?q=" + usertopic + "&client_id=DZH2jBMBKx"
   };
 
-  function callback1(err, mainRes, body) {
+  function callback1(err, res, body) {
     if (!err && body) {
       var body = JSON.parse(body);
       console.log('body: ' + JSON.stringify(body));
